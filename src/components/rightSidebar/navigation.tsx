@@ -1,14 +1,8 @@
 import "./style.scss";
 import { BiHomeAlt2 } from "react-icons/bi";
-import { AiOutlineHeart, AiOutlineLike } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
 
 const navigationOptions = [{ text: "Home", logo: <BiHomeAlt2 /> }];
-const userNavigationOptions = [
-  { text: "Home", logo: <BiHomeAlt2 /> },
-  { text: "My lists", logo: <AiOutlineHeart /> },
-  { text: "Liked lists", logo: <AiOutlineLike /> },
-];
 
 const Navigation = () => {
   const navigate = useNavigate();
