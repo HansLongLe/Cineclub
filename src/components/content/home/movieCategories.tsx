@@ -1,5 +1,5 @@
 import "./style.scss";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 // import { Movie } from "../../../types";
 import { fetchMoviesForCategory } from "../../../api";
 import { IconType } from "react-icons/lib";
