@@ -1,5 +1,6 @@
 import "./style.scss";
-import "swiper/css/bundle";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
 import { fetchMoviesForCategory } from "../../../api";
