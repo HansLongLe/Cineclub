@@ -37,7 +37,18 @@ export const logout = async (token: string) => {
   return response;
 };
 
-export const fetchPopularMovies = async () => {
-  const response = await axios.get("/collection/popular");
+export const fetchMoviesForCategory = async (
+  category: string,
+  page?: number,
+  start?: number,
+  end?: number,
+) => {
+  const response = await axios
+    .get(
+      `/collection/${category}${page ? "?page=" + page : ""}${start ? "&start=" + start : ""}${
+        end ? "&end=" + end : ""
+      }`,
+    )
+    .catch((error) => error);
   return response;
 };

@@ -12,10 +12,12 @@ function App() {
       <img src="./background.png" className="background" />
       <Grid container height="100%" sx={{ position: "absolute" }}>
         <Grid item xs={10}>
-          <Grid container height="100%">
+          <Grid container height="15%">
             <Grid item xs={12}>
               <Topbar />
             </Grid>
+          </Grid>
+          <Grid container height="85%">
             <Grid item xs={4}>
               <LeftSidebar />
             </Grid>

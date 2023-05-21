@@ -5,10 +5,13 @@ import { TiArrowLeftThick } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
 import { Fragment, useState } from "react";
 import TextfieldGroup from "./textfieldGroup";
-import { createAccount } from "../../../api";
+import { createAccount, login } from "../../../api";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../../redux/slices/currentUserSlice";
 
 const CreateAccount = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState<string>("");
   const [emailErrorMessage, setEmailErrorMessage] = useState<string>();
@@ -44,6 +47,9 @@ const CreateAccount = () => {
         setEmailErrorMessage("User with this email already exists");
       } else {
         setSuccessfullyCreated(true);
+        const loginResponse = await login(username, password);
+        dispatch(setCurrentUser({ token: loginResponse.data, username: username }));
+        navigate("/Home");
       }
     }
   };
