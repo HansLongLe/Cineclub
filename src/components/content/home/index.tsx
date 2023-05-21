@@ -20,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     const getPopularMovies = async () => {
       const responseMovies = await fetchMoviesForCategory(categories.popular);
-      if (responseMovies.data) {
+      if (responseMovies && responseMovies.data) {
         setPopularMovies(responseMovies.data);
       }
     };

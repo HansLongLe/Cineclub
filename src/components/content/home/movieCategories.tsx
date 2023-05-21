@@ -1,5 +1,5 @@
 import "./style.scss";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 // import { Movie } from "../../../types";
 import { fetchMoviesForCategory } from "../../../api";
 import { IconType } from "react-icons/lib";
@@ -16,9 +16,8 @@ const MovieCategories: FC<Props> = (props) => {
   useEffect(() => {
     const getMovies = async () => {
       const responseMovies = await fetchMoviesForCategory(props.category, 1, 1, 6);
-      if (responseMovies.data) {
+      if (responseMovies && responseMovies.data) {
         // setMovies(responseMovies.data);
-        console.log(responseMovies);
       }
     };
     getMovies();

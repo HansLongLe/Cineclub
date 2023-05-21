@@ -1,3 +1,4 @@
+import { error } from "console";
 import axios from "../api/axios";
 
 export const createAccount = async (
@@ -43,10 +44,12 @@ export const fetchMoviesForCategory = async (
   start?: number,
   end?: number,
 ) => {
-  const response = await axios.get(
-    `/collection/${category}${page ? "?page=" + page : ""}${start ? "&start=" + start : ""}${
-      end ? "&end=" + end : ""
-    }`,
-  );
+  const response = await axios
+    .get(
+      `/collection/${category}${page ? "?page=" + page : ""}${start ? "&start=" + start : ""}${
+        end ? "&end=" + end : ""
+      }`,
+    )
+    .catch((error) => error);
   return response;
 };
