@@ -1,10 +1,15 @@
 import "./style.scss";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { Button, Menu } from "@mui/material";
+import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Button, Menu, Snackbar } from "@mui/material";
 import LoginPopup from "../loginPopup";
 
-const AuthenticationButtonGroup = () => {
+type Props = {
+  snackbarOpen: boolean;
+  setSnackbarOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+const AuthenticationButtonGroup: FC<Props> = (props) => {
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -19,6 +24,10 @@ const AuthenticationButtonGroup = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleSnackbarClose = () => {
+    props.setSnackbarOpen(false);
   };
 
   return (
@@ -57,6 +66,14 @@ const AuthenticationButtonGroup = () => {
         }}>
         <LoginPopup />
       </Menu>
+      <Snackbar
+        open={props.snackbarOpen}
+        autoHideDuration={5000}
+        onClose={handleSnackbarClose}
+        message="Successfuly logged out"
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        sx={{ borderRadius: "30px" }}
+      />
     </div>
   );
 };
