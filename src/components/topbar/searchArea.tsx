@@ -4,7 +4,7 @@ import { Autocomplete, TextField } from "@mui/material";
 
 const SearchArea = () => {
   return (
-    <div className="seaerch-area">
+    <div className="search-area">
       <Autocomplete
         renderInput={(params) => {
           return (
@@ -14,10 +14,6 @@ const SearchArea = () => {
                 size="medium"
                 InputLabelProps={{ className: "" }}
                 placeholder="Search..."
-                InputProps={{
-                  classes: { notchedOutline: "my-custom-class" },
-                  style: { border: "none" },
-                }}
                 sx={{
                   "& input": { color: "white", textAlign: "end", marginRight: "32px" },
                   "& input::placeholder": {
@@ -25,7 +21,7 @@ const SearchArea = () => {
                   },
                 }}
               />
-              <BiSearchAlt color="#E3E3E3" fontSize="32" className="seaerch-area__icon" />
+              <BiSearchAlt color="#E3E3E3" fontSize="32" className="search-area__icon" />
             </>
           );
         }}

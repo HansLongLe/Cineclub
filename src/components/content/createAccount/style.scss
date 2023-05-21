@@ -1,0 +1,88 @@
+.create-account {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(black, 0.9);
+  & .sidebar {
+    width: 80%;
+    height: 200%;
+    transform: translate(-25%, -25%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border-radius: 50%;
+    animation: sidebar-transition 1s ease-in-out;
+    &-content {
+      transform: translateX(30%);
+      font-size: xx-large;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      &__title {
+        margin-bottom: 32px;
+      }
+      &-textfield-group {
+        display: flex;
+        flex-direction: row;
+        &-left,
+        &-right {
+          margin: 0 24px 0 24px;
+        }
+        &-left .textfield-container,
+        &-right .textfield-container {
+          margin: 24px 0 24px 0;
+          display: flex;
+          justify-content: flex-end;
+          & .icon {
+            position: absolute;
+            right: 32px;
+          }
+          & .icon2 {
+            position: absolute;
+            right: -8px;
+          }
+        }
+      }
+      & .MuiOutlinedInput-notchedOutline {
+        border: none;
+      }
+      & .sign-up {
+        height: 60px;
+        width: 30%;
+        border-radius: 32px;
+        margin-right: 32px;
+        background: linear-gradient(#8685ef, rgba(134, 133, 239, 0.25));
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.3s;
+        font-size: x-large;
+        &:hover {
+          transform: scale(1.05);
+        }
+        margin: 24px 0 12px 0;
+      }
+    }
+    & .title-logo {
+      margin-left: -24px;
+      transform: scale(0.5);
+      transition: transform 0.3s;
+      &:hover {
+        transform: scale(0.55);
+      }
+    }
+  }
+}
+
+@keyframes sidebar-transition {
+  0% {
+    transform: translate(-110%, -25%);
+  }
+  100% {
+    transform: translate(-25%, -25%);
+  }
+}
