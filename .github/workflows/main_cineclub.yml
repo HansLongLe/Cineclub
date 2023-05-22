@@ -8,6 +8,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  
+env:
+  DAY_OF_WEEK: Monday
 
 jobs:
   build:
@@ -31,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: build/
 
   deploy:
     runs-on: ubuntu-latest
