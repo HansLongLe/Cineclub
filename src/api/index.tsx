@@ -5,12 +5,12 @@ export const createAccount = async (
   firstName: string,
   lastName: string,
   username: string,
-  password: string,
+  password: string
 ) => {
   const response = await axios
     .post("/registration", {
       accountDto: { username: username, password: password },
-      userDto: { firstName: firstName, lastName: lastName, email: email },
+      userDto: { firstName: firstName, lastName: lastName, email: email }
     })
     .catch((error) => {
       if (error.response) return error.response.data;
@@ -42,13 +42,19 @@ export const fetchMoviesForCategory = async (
   page?: number,
   start?: number,
   end?: number,
+  period?: number
 ) => {
   const response = await axios
     .get(
-      `/collection/${category}${page ? "?page=" + page : ""}${start ? "&start=" + start : ""}${
-        end ? "&end=" + end : ""
-      }`,
+      `/collection/${period ? category + "/" : category}${period ? period : ""}${
+        page ? "?page=" + page : ""
+      }${start ? "&start=" + start : ""}${end ? "&end=" + end : ""}`
     )
     .catch((error) => error);
+  return response;
+};
+
+export const fetchGenres = async () => {
+  const response = await axios.get("/genres");
   return response;
 };

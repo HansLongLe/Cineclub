@@ -1,12 +1,16 @@
-import React from "react";
 import "./App.scss";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
+import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import { Outlet } from "react-router-dom";
 import Topbar from "./components/topbar";
 import LeftSidebar from "./components/leftSidebar";
 import RightSidebar from "./components/rightSidebar";
 import { Grid } from "@mui/material";
 
-function App() {
+const App = () => {
+  SwiperCore.use([Navigation, Pagination, Autoplay]);
+
   return (
     <div className="app">
       <img src="./background.png" className="background" />
@@ -18,10 +22,10 @@ function App() {
             </Grid>
           </Grid>
           <Grid container height="85%">
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <LeftSidebar />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={9}>
               <Outlet />
             </Grid>
           </Grid>
@@ -32,6 +36,6 @@ function App() {
       </Grid>
     </div>
   );
-}
+};
 
 export default App;

@@ -11,3 +11,8 @@ export type Movie = {
   voteAverage: number;
   voteCount: number;
 };
+
+export type Genre = {
+  id: number;
+  name: string;
+};
