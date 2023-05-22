@@ -10,7 +10,8 @@ on:
   workflow_dispatch:
   
 env:
-  DAY_OF_WEEK: Monday
+  REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+  REACT_APP_IMG_URL: ${{ secrets.REACT_APP_IMG_URL }}
 
 jobs:
   build:
