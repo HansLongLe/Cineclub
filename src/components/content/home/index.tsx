@@ -14,7 +14,7 @@ import { categories, categoryTitles } from "../../../types/enums";
 import MovieCategories from "./movieCategories";
 
 const Home = () => {
-  const [popularMovies, setPopularMovies] = useState<Movie[]>();
+  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
   const [swiper, setSwiper] = useState<SwiperType>();
 
   useEffect(() => {
@@ -33,15 +33,15 @@ const Home = () => {
         <div className="home-popular__title">
           {categoryTitles.popular} <AiFillFire />
         </div>
-        {popularMovies && (
-          <Swiper
-            className="home-popular-carousel"
-            slidesPerView={1}
-            loop
-            onSwiper={(swiper) => {
-              setSwiper(swiper);
-            }}>
-            {popularMovies.map((movie) => {
+        <Swiper
+          className="home-popular-carousel"
+          slidesPerView={1}
+          loop
+          onSwiper={(swiper) => {
+            setSwiper(swiper);
+          }}>
+          {popularMovies.length !== 0 &&
+            popularMovies.map((movie) => {
               return (
                 <SwiperSlide key={movie.id}>
                   <div className="movie-item">
@@ -51,8 +51,7 @@ const Home = () => {
                 </SwiperSlide>
               );
             })}
-          </Swiper>
-        )}
+        </Swiper>
         <div className="home-popular-buttons">
           <IconButton onClick={() => swiper?.slidePrev()}>
             <GrFormPrevious />
