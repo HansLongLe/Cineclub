@@ -57,3 +57,6 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D62A0E444E034CDE8B8FB07228DCD56E }}
           package: .
+        env:
+          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+          REACT_APP_IMG_URL: ${{ secrets.REACT_APP_IMG_URL }}
