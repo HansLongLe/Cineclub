@@ -1,6 +1,4 @@
 import "./style.scss";
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
 import { fetchMoviesForCategory } from "../../../api";
@@ -8,13 +6,14 @@ import { Movie } from "../../../types";
 import { AiFillFire, AiTwotoneStar } from "react-icons/ai";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { MdFiberNew } from "react-icons/md";
+import { HiTrendingUp } from "react-icons/hi";
 import { IconButton } from "@mui/material";
-import { Swiper as SwiperType } from "swiper/types";
 import { categories, categoryTitles } from "../../../types/enums";
+import { Swiper as SwiperType } from "swiper";
 import MovieCategories from "./movieCategories";
 
 const Home = () => {
-  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
+  const [popularMovies, setPopularMovies] = useState<Movie[]>();
   const [swiper, setSwiper] = useState<SwiperType>();
 
   useEffect(() => {
@@ -33,15 +32,15 @@ const Home = () => {
         <div className="home-popular__title">
           {categoryTitles.popular} <AiFillFire />
         </div>
-        <Swiper
-          className="home-popular-carousel"
-          slidesPerView={1}
-          loop
-          onSwiper={(swiper) => {
-            setSwiper(swiper);
-          }}>
-          {popularMovies.length !== 0 &&
-            popularMovies.map((movie) => {
+        {popularMovies && (
+          <Swiper
+            onInit={(swiper) => setSwiper(swiper)}
+            className="home-popular-carousel"
+            slidesPerView={1}
+            loop
+            autoplay
+            pagination>
+            {popularMovies.map((movie) => {
               return (
                 <SwiperSlide key={movie.id}>
                   <div className="movie-item">
@@ -51,7 +50,8 @@ const Home = () => {
                 </SwiperSlide>
               );
             })}
-        </Swiper>
+          </Swiper>
+        )}
         <div className="home-popular-buttons">
           <IconButton onClick={() => swiper?.slidePrev()}>
             <GrFormPrevious />
@@ -65,6 +65,12 @@ const Home = () => {
         category={categories.topRated}
         categoryTitle={categoryTitles.topRated}
         categoryIcon={AiTwotoneStar}
+      />
+      <MovieCategories
+        category={categories.trending}
+        categoryTitle={categoryTitles.trending}
+        categoryIcon={HiTrendingUp}
+        period={1}
       />
       <MovieCategories
         category={categories.upcoming}

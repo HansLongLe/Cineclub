@@ -1,11 +1,13 @@
 export enum categories {
   popular = "popular",
   topRated = "toprated",
-  upcoming = "upcoming",
+  trending = "trending",
+  upcoming = "upcoming"
 }
 
 export enum categoryTitles {
   popular = "Popular",
   topRated = "Top Rated",
-  upcoming = "Upcoming",
+  trending = "Trending",
+  upcoming = "Upcoming"
 }

@@ -1,0 +1,9 @@
+.avg-rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__number {
+    color: white;
+    font-size: small;
+  }
+}
