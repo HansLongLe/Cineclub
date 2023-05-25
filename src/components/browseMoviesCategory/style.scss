@@ -1,0 +1,85 @@
+.movies {
+  & .movies-container {
+    & .movie-item {
+      height: 350px;
+      width: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s;
+      &:hover {
+        transform: scale(1.01);
+      }
+      &-content {
+        width: 90%;
+        height: 90%;
+        background-color: #141414;
+        border-radius: 20px;
+        &-left-sidebar {
+          float: left;
+          height: 100%;
+          width: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          & img {
+            cursor: pointer;
+            height: 90%;
+            width: 90%;
+            border-radius: 20px;
+            color: white;
+            transition: filter 0.3s;
+          }
+          & .hovered {
+            filter: brightness(0.1);
+          }
+          & .button-group {
+            position: absolute;
+            z-index: 3;
+            & svg {
+              color: white;
+              transition: transform 0.3s;
+              &:hover {
+                transform: scale(1.2);
+              }
+            }
+          }
+        }
+        &-right-sidebar {
+          float: left;
+          height: 100%;
+          width: 50%;
+          & .movie-title {
+            color: white;
+            font-weight: bold;
+            font-size: small;
+            margin: 16px 0;
+          }
+          & .movie-description {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            padding: 16px;
+            & .row {
+              font-size: small;
+              margin-top: 16px;
+              font-weight: 100;
+              color: grey;
+              display: flex;
+              flex-direction: row;
+              text-align: end;
+              & .value {
+                color: white;
+                margin-left: 8px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  & .footer-pagination {
+    display: flex;
+    justify-content: center;
+  }
+}

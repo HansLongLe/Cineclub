@@ -4,6 +4,9 @@
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   &::-webkit-scrollbar-track {
     background-color: transparent;
   }
@@ -14,16 +17,15 @@
     width: 6px;
   }
   &-popular {
-    width: 91%;
+    width: 70%;
     transform: translateX(0%);
-    margin-bottom: -10%;
     &__title {
       color: white;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       margin-bottom: 16px;
-      margin-right: -4%;
+      margin-right: -15%;
       font-weight: bold;
       font-size: x-large;
       & svg {
@@ -83,15 +85,17 @@
     }
   }
   & .movie-category {
-    width: 95%;
-    height: 95%;
-    margin-top: 20%;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     &-title {
       color: white;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       margin-bottom: 16px;
+      margin-right: -80%;
       font-weight: bold;
       font-size: x-large;
       & svg {
@@ -100,16 +104,12 @@
       }
     }
     &-movies {
-      width: 100%;
-      height: 100%;
       & .movie-item {
-        height: 400px;
-        width: 50%;
-        float: left;
+        height: 350px;
+        width: 500px;
         display: flex;
         justify-content: center;
         align-items: center;
-        cursor: pointer;
         transition: transform 0.3s;
         &:hover {
           transform: scale(1.01);
@@ -127,9 +127,26 @@
             justify-content: center;
             align-items: center;
             & img {
+              cursor: pointer;
               height: 90%;
               width: 90%;
               border-radius: 20px;
+              color: white;
+              transition: filter 0.3s;
+            }
+            & .hovered {
+              filter: brightness(0.1);
+            }
+            & .button-group {
+              position: absolute;
+              z-index: 3;
+              & svg {
+                color: white;
+                transition: transform 0.3s;
+                &:hover {
+                  transform: scale(1.2);
+                }
+              }
             }
           }
           &-right-sidebar {
@@ -166,7 +183,7 @@
       }
     }
     & .footer {
-      width: 100%;
+      width: 80%;
       display: flex;
       justify-content: center;
       margin: 16px 0;

@@ -8,6 +8,7 @@ import TextfieldGroup from "./textfieldGroup";
 import { createAccount, login } from "../../../api";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../../redux/slices/currentUserSlice";
+import { routePaths } from "../../../types/enums";
 
 const CreateAccount = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const CreateAccount = () => {
   const isEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   const goBack = () => {
-    navigate("/Home");
+    navigate(routePaths.home);
   };
 
   const handleSignUp = async () => {
@@ -48,8 +49,16 @@ const CreateAccount = () => {
       } else {
         setSuccessfullyCreated(true);
         const loginResponse = await login(username, password);
-        dispatch(setCurrentUser({ token: loginResponse.data, username: username }));
-        navigate("/Home");
+        if (loginResponse.status === 200) {
+          dispatch(
+            setCurrentUser({
+              token: loginResponse.data.token,
+              username: username,
+              userId: loginResponse.data.userId
+            })
+          );
+          navigate(routePaths.home);
+        }
       }
     }
   };
@@ -110,8 +119,8 @@ const CreateAccount = () => {
           fontSize: "small",
           color: "#8685ef",
           "&:hover": {
-            backgroundColor: "rgba(53, 52, 94, 0.5)",
-          },
+            backgroundColor: "rgba(53, 52, 94, 0.5)"
+          }
         }}>
         OK
       </IconButton>
@@ -120,7 +129,7 @@ const CreateAccount = () => {
 
   return (
     <div className="create-account">
-      <img src="./background.png" className="background" />
+      <img src="/images/background.png" className="background" />
       <div className="sidebar">
         <IconButton
           onClick={goBack}
@@ -132,8 +141,8 @@ const CreateAccount = () => {
             transition: "transform 0.3s",
             "&:hover": {
               backgroundColor: "rgba(53, 52, 94, 0.5)",
-              transform: "scale(1.1)",
-            },
+              transform: "scale(1.1)"
+            }
           }}>
           <TiArrowLeftThick fontSize="xx-large" />
         </IconButton>

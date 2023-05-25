@@ -1,0 +1,76 @@
+.movie {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  & .overview {
+    display: flex;
+    flex-direction: column;
+    & .basic-info {
+      display: flex;
+      flex-direction: row;
+      & .text-button-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: end;
+        color: white;
+        margin-right: 32px;
+        & .title {
+          font-size: xx-large;
+          font-weight: bold;
+        }
+        & .quick-info {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          & div:first-child {
+            margin-right: 16px;
+          }
+        }
+        & .avg-rating {
+          justify-content: end;
+          margin-top: 250px;
+        }
+        & .vote-count {
+          width: 72px;
+          display: flex;
+          justify-content: center;
+          margin-top: 4px;
+        }
+      }
+      & img {
+        width: 500px;
+        height: 700px;
+        margin-right: 48px;
+        border-radius: 30px;
+        box-shadow: 12px 12px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+}
+
+.heart-icon {
+  width: 100px;
+  height: 100px;
+  transform: scale(0.7);
+  margin: -32px -32px -32px -28px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+
+  &.is-active {
+    transition-duration: 1s;
+    background-position: -2800px 0;
+  }
+}
+
+.MuiButtonBase-root {
+  &.MuiCheckbox-root {
+    color: white;
+    &.Mui-checked {
+      color: #8685ef;
+    }
+  }
+}

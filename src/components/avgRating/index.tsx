@@ -1,6 +1,6 @@
 import "./style.scss";
 import { CircularProgress } from "@mui/material";
-import { FC } from "react";
+import { FC, useRef } from "react";
 
 type Props = {
   ratingNumber: number;
@@ -8,19 +8,28 @@ type Props = {
 };
 
 const AvgRating: FC<Props> = (props) => {
+  const ref = useRef<HTMLSpanElement>(null);
+
   return (
     <div className="avg-rating">
       <p
         className="avg-rating__number"
         style={{
-          marginRight: `${props.ratingNumber.toString().length > 1 ? "-24.5px" : "-19px"}`
+          marginRight: `-${
+            (Number(props.size) +
+              (Number(props.size) + (props.ratingNumber % 1 !== 0 ? Number(props.size) / 8 : -16)) /
+                4) /
+            2
+          }px`,
+          fontSize: `${Number(props.size) / 4}px`
         }}>
-        {props.ratingNumber}
+        {Math.round(props.ratingNumber * 10) / 10}
       </p>
       <CircularProgress
+        ref={ref}
         variant="determinate"
         value={props.ratingNumber * 10}
-        size={props.size}
+        size={`${props.size}px`}
         sx={{
           color: `${
             props.ratingNumber > 8

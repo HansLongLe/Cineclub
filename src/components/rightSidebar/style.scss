@@ -14,6 +14,13 @@
   }
   &-footer {
     height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & img {
+      width: 167px;
+      height: 22px;
+    }
   }
 }
 
@@ -29,12 +36,13 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    text-align: end;
     height: 64px;
     cursor: pointer;
     border-radius: 8px;
     transition: font-size 0.3s;
     &:hover:not(.--selected) {
-      font-size: 26px;
+      font-size: 24.5px;
     }
     &.--selected {
       background-color: rgba(#494980, 0.6);

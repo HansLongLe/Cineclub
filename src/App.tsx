@@ -4,16 +4,22 @@ import "swiper/swiper.min.css";
 import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import { Outlet } from "react-router-dom";
 import Topbar from "./components/topbar";
-import LeftSidebar from "./components/leftSidebar";
 import RightSidebar from "./components/rightSidebar";
 import { Grid } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "./redux/store";
 
 const App = () => {
   SwiperCore.use([Navigation, Pagination, Autoplay]);
 
+  const { backgroundImage } = useSelector((state: RootState) => state.backgroundImage);
+
   return (
     <div className="app">
-      <img src="./background.png" className="background" />
+      <img
+        src={`${backgroundImage ? backgroundImage : "/images/background.png"}`}
+        className={`background ${backgroundImage ? "darken" : ""}`}
+      />
       <Grid container height="100%" sx={{ position: "absolute" }}>
         <Grid item xs={10}>
           <Grid container height="15%">
@@ -22,10 +28,7 @@ const App = () => {
             </Grid>
           </Grid>
           <Grid container height="85%">
-            <Grid item xs={3}>
-              <LeftSidebar />
-            </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={12}>
               <Outlet />
             </Grid>
           </Grid>
