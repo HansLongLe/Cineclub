@@ -17,8 +17,8 @@ const SearchArea = () => {
                 sx={{
                   "& input": { color: "white", textAlign: "end", marginRight: "32px" },
                   "& input::placeholder": {
-                    color: "#E3E3E3",
-                  },
+                    color: "#E3E3E3"
+                  }
                 }}
               />
               <BiSearchAlt color="#E3E3E3" fontSize="32" className="search-area__icon" />
@@ -27,13 +27,14 @@ const SearchArea = () => {
         }}
         options={[]}
         sx={{
-          background: "linear-gradient(#303030, rgba(48, 48, 48, 0.25))",
+          background: "linear-gradient(#292828, rgba(48, 48, 48, 0.5))",
           width: "70%",
           borderRadius: "32px",
           marginRight: "10%",
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
+          boxShadow: "8px 8px rgba(0,0,0,0.3)"
         }}
       />
     </div>

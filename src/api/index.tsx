@@ -58,3 +58,36 @@ export const fetchGenres = async () => {
   const response = await axios.get("/genres");
   return response;
 };
+
+export const fetchMovieInfo = async (movieId: number) => {
+  const response = await axios.get("/movie/" + movieId);
+  return response;
+};
+
+export const fetchList = async (path: string, tokenUserId: string, token?: string) => {
+  axios.interceptors.request.use((config) => {
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
+  const response = await axios.get(path + tokenUserId);
+  return response;
+};
+
+export const fetchTags = async () => {
+  const response = await axios.get("/all_lists?page=1&start=1&end=20");
+  return response;
+};
+
+export const createListApi = async (
+  title: string,
+  visible: boolean,
+  userId: string,
+  token: string
+) => {
+  axios.interceptors.request.use((config) => {
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
+  const response = await axios.post("/list", { name: title, public: visible, creatorId: userId });
+  return response;
+};

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { Button, Menu, Snackbar } from "@mui/material";
 import LoginPopup from "../loginPopup";
+import { routePaths } from "../../types/enums";
 
 type Props = {
   snackbarOpen: boolean;
@@ -15,7 +16,7 @@ const AuthenticationButtonGroup: FC<Props> = (props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const onSignUpClick = () => {
-    navigate("/CreateAccount");
+    navigate(routePaths.createAccount);
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,18 +52,18 @@ const AuthenticationButtonGroup: FC<Props> = (props) => {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "left",
+          horizontal: "left"
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "left"
         }}
         sx={{
           marginTop: "16px",
           "& .MuiPaper-root": {
             backgroundColor: "black",
-            borderRadius: "30px",
-          },
+            borderRadius: "30px"
+          }
         }}>
         <LoginPopup />
       </Menu>

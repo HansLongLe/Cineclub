@@ -31,26 +31,29 @@ type Props = {
   setRepeatPasswordErrorMessage: Dispatch<React.SetStateAction<string | undefined>>;
 };
 
-const textfieldSx = {
+export const textfieldSx = {
   width: "300px",
   input: {
     backgroundColor: "rgba(227, 227, 227, 0.2)",
     borderRadius: "20px",
-    color: "white",
+    color: "white"
   },
   "& .MuiInputLabel-root": {
-    color: "#adadad",
+    color: "#adadad"
   },
   "& .MuiInputLabel-shrink": {
-    top: "-8px",
+    top: "-8px"
   },
   "& .MuiInputLabel-root.Mui-focused": {
-    color: "#8685ef",
+    color: "#8685ef"
   },
   "& input:focus": {
     border: "1px solid #8685ef",
-    borderRadius: "20px",
+    borderRadius: "20px"
   },
+  "& .MuiOutlinedInput-notchedOutline": {
+    border: "none"
+  }
 };
 
 const TextfieldGroup: FC<Props> = (props) => {

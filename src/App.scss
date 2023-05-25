@@ -8,4 +8,7 @@
   height: 100%;
   position: absolute;
   top: 0;
+  &.darken {
+    filter: brightness(0.25);
+  }
 }

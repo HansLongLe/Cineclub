@@ -12,24 +12,24 @@ const textfieldSx = {
   input: {
     backgroundColor: "rgba(227, 227, 227, 0.2)",
     borderRadius: "20px",
-    color: "white",
+    color: "white"
   },
   "& .MuiInputLabel-root": {
-    color: "#adadad",
+    color: "#adadad"
   },
   "& .MuiInputLabel-shrink": {
-    top: "-8px",
+    top: "-8px"
   },
   "& .MuiInputLabel-root.Mui-focused": {
-    color: "#8685ef",
+    color: "#8685ef"
   },
   "& input:focus": {
     border: "1px solid #8685ef",
-    borderRadius: "20px",
+    borderRadius: "20px"
   },
   "& .MuiOutlinedInput-notchedOutline": {
-    border: "none",
-  },
+    border: "none"
+  }
 };
 
 const LoginPopup = () => {
@@ -47,6 +47,9 @@ const LoginPopup = () => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     event.stopPropagation();
+    if (event.key === "Enter") {
+      handleLogin();
+    }
   };
 
   const handleLogin = async () => {
@@ -57,13 +60,19 @@ const LoginPopup = () => {
       setPasswordErrorMessage("Password cannot be empty");
     }
     if (username.length !== 0 && password.length !== 0) {
-      const response = await login(username, password);
-      if (typeof response === "string" && response.includes("Username")) {
+      const loginResponse = await login(username, password);
+      if (typeof loginResponse === "string" && loginResponse.includes("Username")) {
         setUsernameErrorMessage("User with this username does not exist");
-      } else if (typeof response === "string" && response.includes("Password")) {
+      } else if (typeof loginResponse === "string" && loginResponse.includes("Password")) {
         setPasswordErrorMessage("Password is incorrect");
-      } else if (response.status === 200) {
-        dispatch(setCurrentUser({ token: response.data, username: username }));
+      } else if (loginResponse.status === 200) {
+        dispatch(
+          setCurrentUser({
+            token: loginResponse.data.token,
+            username: username,
+            userId: loginResponse.data.userId
+          })
+        );
       }
     }
   };
@@ -89,6 +98,9 @@ const LoginPopup = () => {
           label="Password"
           type={`${visiblePassword ? "text" : "password"}`}
           sx={textfieldSx}
+          onKeyDown={(event) => {
+            handleKeyDown(event);
+          }}
           onChange={(event) => {
             setPasswordErrorMessage("");
             setPassword(event.target.value);

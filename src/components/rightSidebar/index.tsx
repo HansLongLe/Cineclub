@@ -11,7 +11,9 @@ const RightSidebar = () => {
       <div className="right-sidebar-navigation-menu">
         <Navigation />
       </div>
-      <div className="right-sidebar-footer"></div>
+      <div className="right-sidebar-footer">
+        <img src="/images/TMDB logo.png" />
+      </div>
     </div>
   );
 };

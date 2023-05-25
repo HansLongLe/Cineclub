@@ -1,3 +1,11 @@
+export enum routePaths {
+  home = "Home",
+  createAccount = "CreateAccount",
+  specificMovie = "Movie/",
+  myLists = "MyLists",
+  browseLists = "BrowseLists"
+}
+
 export enum categories {
   popular = "popular",
   topRated = "toprated",
