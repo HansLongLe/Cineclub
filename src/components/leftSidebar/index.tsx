@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { routePaths } from "../../types/enums";
 import MovieFilters, { MovieFiltersRef } from "./movieFilters";
 import ListFilters from "./listFilters";
-import { Dispatch, FC, SetStateAction, forwardRef, useImperativeHandle, useRef } from "react";
+import { Dispatch, SetStateAction, forwardRef, useImperativeHandle, useRef } from "react";
 import { Movie } from "../../types";
 
 type Props = {

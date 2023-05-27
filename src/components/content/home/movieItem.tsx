@@ -1,11 +1,9 @@
-import { FC, Fragment, useEffect, useState } from "react";
-import { Genre, List, Movie } from "../../../types";
+import { FC, useEffect, useState } from "react";
+import { Genre, Movie } from "../../../types";
 import AvgRating from "../../avgRating";
 import {
   deleteMovieFromListApi,
   fetchGenresApi,
-  fetchListApi,
-  movieInListsApi,
   movieInWatchedOrLikedApi,
   saveMovieToListApi
 } from "../../../api";
@@ -149,6 +147,10 @@ const MovieItem: FC<Props> = (props) => {
     }
   };
 
+  const truncate = (string: string) => {
+    return string.length > 90 ? string.substring(0, 90) + "..." : string;
+  };
+
   return (
     <>
       <div className="movie-item">
@@ -197,7 +199,9 @@ const MovieItem: FC<Props> = (props) => {
             />
           </div>
           <div className="movie-item-content-right-sidebar">
-            <div className="movie-title">{props.movie.title}</div>
+            <div className="movie-title" title={props.movie.title}>
+              {truncate(props.movie.title)}
+            </div>
             <div className="movie-description">
               {props.movie.voteAverage ? (
                 <AvgRating ratingNumber={Math.round(props.movie.voteAverage * 10) / 10} size="32" />

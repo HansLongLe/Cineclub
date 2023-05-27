@@ -1,6 +1,5 @@
 import {
   Dispatch,
-  FC,
   SetStateAction,
   forwardRef,
   useEffect,
