@@ -6,7 +6,7 @@ import { saveMovieToListApi, deleteMovieFromListApi, movieInWatchedOrLikedApi } 
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useNavigate } from "react-router-dom";
-import { List, Movie } from "../../../types";
+import { Movie } from "../../../types";
 import { routePaths } from "../../../types/enums";
 
 type Props = {
