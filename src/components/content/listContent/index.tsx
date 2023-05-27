@@ -15,12 +15,12 @@ const ListContent = () => {
   return (
     <div className="list-content">
       <Grid container sx={{ height: "100%" }}>
-        <Grid item xs={3}>
+        <Grid item xs={2.5}>
           <LeftSidebar />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={9.5}>
           <div className="main">
-            {location.pathname === "/" + routePaths.myLists && (
+            {location.pathname === "/" + routePaths.myLists ? (
               <>
                 <Lists
                   title="Watched list"
@@ -28,6 +28,7 @@ const ListContent = () => {
                   useUserId
                   userId={currentUser.userId || ""}
                   token={currentUser.token || ""}
+                  canDeleteMovie
                 />
                 <Lists
                   title="Liked list"
@@ -35,13 +36,35 @@ const ListContent = () => {
                   useUserId
                   userId={currentUser.userId || ""}
                   token={currentUser.token || ""}
+                  canDeleteMovie
                 />
                 <Lists
                   title="Custom Lists"
-                  apiPath="/lists?tokenBody="
+                  apiPath="/lists?userId="
                   hasCreateButton
                   userId={currentUser.userId || ""}
                   token={currentUser.token || ""}
+                  hasDeleteButton
+                  canDeleteMovie
+                />
+                <Lists
+                  title="Saved lists"
+                  apiPath="/liked_lists?userId="
+                  hasAddButton
+                  userId={currentUser.userId || ""}
+                  token={currentUser.token || ""}
+                  hasDeleteButton
+                  canDeleteMovie
+                />
+              </>
+            ) : (
+              <>
+                <Lists
+                  title="Public lists"
+                  apiPath="/all_lists"
+                  userId={""}
+                  token={currentUser.token || ""}
+                  hasPagination
                 />
               </>
             )}

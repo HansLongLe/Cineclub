@@ -55,3 +55,44 @@ export type ProductionCountries = {
   iso_3166_1: string;
   name: string;
 };
+
+export type List = {
+  name: string;
+  creatorId: string;
+  id: string;
+  public: boolean;
+  tags?: Tag[];
+  movieName?: string;
+  backdropPath?: string;
+};
+
+export type Tag = {
+  name: string;
+  id: string;
+};
+
+export type ListInfo = {
+  name: string;
+  id: string;
+  public: boolean;
+  creatorId: string;
+  top5ActorsFromList: Actor[];
+  movieDtos: Movie[];
+  tagsDtos: Tag[];
+};
+
+export type Actor = {
+  character: string;
+  id: number;
+  knownForDepartment: string;
+  name: string;
+  originalName: string;
+  popularity: number;
+  profilePath: string;
+  job?: string;
+};
+
+export type Language = {
+  englishName: string;
+  iso_639_1: string;
+};

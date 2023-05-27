@@ -5,7 +5,8 @@ import CreateAccount from "../components/content/createAccount";
 import SpecificMovie from "../components/content/specificMovie";
 import ListContent from "../components/content/listContent";
 import { routePaths } from "../types/enums";
-import BrowseLists from "../components/content/browseLists";
+import SpecificList from "../components/content/specificList";
+import BrowseMovies from "../components/content/browseMovies";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,23 @@ const router = createBrowserRouter([
       },
       {
         path: routePaths.browseLists,
-        element: <BrowseLists />
+        element: <ListContent />
+      },
+      {
+        path: routePaths.specificList + ":listId",
+        element: <SpecificList />
+      },
+      {
+        path: routePaths.publicSpecificList + ":listId",
+        element: <SpecificList />
+      },
+      {
+        path: routePaths.browseMovies,
+        element: <BrowseMovies />
+      },
+      {
+        path: routePaths.browseMovies + "/:keyword",
+        element: <BrowseMovies />
       },
       {
         path: "*",

@@ -1,0 +1,72 @@
+.left-sidebar {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  max-height: 100%;
+  background-color: black;
+  border-radius: 20px;
+
+  & .movie-filters {
+    height: 100%;
+    width: 100%;
+    & .container {
+      overflow-y: auto;
+      max-height: 80vh;
+      margin: 16px;
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+      &::-webkit-scrollbar-track {
+        background: grey;
+        border-radius: 20px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: white;
+        border-radius: 20px;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background: grey;
+      }
+      & .title {
+        font-weight: bolder;
+        color: white;
+      }
+      & .genre-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      & .button-container {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+  & .list-filters {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.MuiAccordionDetails-root {
+  color: white;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+  cursor: pointer;
+}

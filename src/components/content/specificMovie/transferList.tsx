@@ -11,22 +11,22 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
 
-const not = (a: readonly number[], b: readonly number[]) => {
+const not = (a: number[], b: number[]) => {
   return a.filter((value) => b.indexOf(value) === -1);
 };
 
-const intersection = (a: readonly number[], b: readonly number[]) => {
+const intersection = (a: number[], b: number[]) => {
   return a.filter((value) => b.indexOf(value) !== -1);
 };
 
-const union = (a: readonly number[], b: readonly number[]) => {
+const union = (a: number[], b: number[]) => {
   return [...a, ...not(b, a)];
 };
 
 const TransferList = () => {
-  const [checked, setChecked] = useState<readonly number[]>([]);
-  const [left, setLeft] = useState<readonly number[]>([0, 1, 2, 3]);
-  const [right, setRight] = useState<readonly number[]>([4, 5, 6, 7]);
+  const [checked, setChecked] = useState<number[]>([]);
+  const [left, setLeft] = useState<number[]>([0, 1, 2, 3]);
+  const [right, setRight] = useState<number[]>([4, 5, 6, 7]);
 
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
@@ -44,9 +44,9 @@ const TransferList = () => {
     setChecked(newChecked);
   };
 
-  const numberOfChecked = (items: readonly number[]) => intersection(checked, items).length;
+  const numberOfChecked = (items: number[]) => intersection(checked, items).length;
 
-  const handleToggleAll = (items: readonly number[]) => () => {
+  const handleToggleAll = (items: number[]) => () => {
     if (numberOfChecked(items) === items.length) {
       setChecked(not(checked, items));
     } else {
@@ -66,7 +66,7 @@ const TransferList = () => {
     setChecked(not(checked, rightChecked));
   };
 
-  const customList = (title: React.ReactNode, items: readonly number[]) => (
+  const customList = (title: React.ReactNode, items: number[]) => (
     <Card>
       <CardHeader
         sx={{ px: 2, py: 1, backgroundColor: "#292828" }}

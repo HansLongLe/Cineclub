@@ -32,11 +32,11 @@ const AvgRating: FC<Props> = (props) => {
         size={`${props.size}px`}
         sx={{
           color: `${
-            props.ratingNumber > 8
+            props.ratingNumber >= 8
               ? "rgba(96, 255, 121, 0.87)"
-              : props.ratingNumber > 6
+              : props.ratingNumber >= 6
               ? "rgba(246, 178, 45, 0.87)"
-              : props.ratingNumber > 3
+              : props.ratingNumber >= 3
               ? "rgba(244, 67, 54, 0.87)"
               : "rgba(153, 0, 0, 0.87)"
           }`

@@ -3,7 +3,10 @@ export enum routePaths {
   createAccount = "CreateAccount",
   specificMovie = "Movie/",
   myLists = "MyLists",
-  browseLists = "BrowseLists"
+  browseLists = "BrowseLists",
+  specificList = "ListInfo/",
+  publicSpecificList = "PublicList/",
+  browseMovies = "BrowseMovies"
 }
 
 export enum categories {

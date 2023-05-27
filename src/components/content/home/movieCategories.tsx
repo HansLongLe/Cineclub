@@ -1,7 +1,7 @@
 import "./style.scss";
 import { FC, useEffect, useState } from "react";
 import { Movie } from "../../../types";
-import { fetchMoviesForCategory } from "../../../api";
+import { fetchMoviesForCategoryApi } from "../../../api";
 import { IconType } from "react-icons/lib";
 import { IoIosArrowDown } from "react-icons/io";
 import { Dialog, DialogContent, DialogTitle, Grid, IconButton } from "@mui/material";
@@ -22,9 +22,10 @@ const MovieCategories: FC<Props> = (props) => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const responseMovies = await fetchMoviesForCategory(props.category, 1, 1, 6, props.period);
+      const responseMovies = await fetchMoviesForCategoryApi(props.category, 1, 1, 6, props.period);
       if (responseMovies && responseMovies.data) {
         setMovies(responseMovies.data.movies);
+        console.log(responseMovies.data);
       }
     };
     getMovies();
