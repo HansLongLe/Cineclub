@@ -2,7 +2,7 @@ import { Button, IconButton, TextField, Tooltip } from "@mui/material";
 import "./style.scss";
 import { useState } from "react";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
-import { login } from "../../api";
+import { loginApi } from "../../api";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../redux/slices/currentUserSlice";
 
@@ -60,7 +60,7 @@ const LoginPopup = () => {
       setPasswordErrorMessage("Password cannot be empty");
     }
     if (username.length !== 0 && password.length !== 0) {
-      const loginResponse = await login(username, password);
+      const loginResponse = await loginApi(username, password);
       if (typeof loginResponse === "string" && loginResponse.includes("Username")) {
         setUsernameErrorMessage("User with this username does not exist");
       } else if (typeof loginResponse === "string" && loginResponse.includes("Password")) {

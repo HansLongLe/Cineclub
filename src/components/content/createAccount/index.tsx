@@ -5,7 +5,7 @@ import { TiArrowLeftThick } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
 import { Fragment, useState } from "react";
 import TextfieldGroup from "./textfieldGroup";
-import { createAccount, login } from "../../../api";
+import { createAccountApi, loginApi } from "../../../api";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../../redux/slices/currentUserSlice";
 import { routePaths } from "../../../types/enums";
@@ -41,14 +41,14 @@ const CreateAccount = () => {
 
   const handleSignUp = async () => {
     if (validateInfo() && email && firstName && lastName && username && password) {
-      const response = await createAccount(email, firstName, lastName, username, password);
+      const response = await createAccountApi(email, firstName, lastName, username, password);
       if (typeof response === "string" && response.includes("username")) {
         setUsernameErrorMessage("User with this username already exists");
       } else if (typeof response === "string" && response.includes("email")) {
         setEmailErrorMessage("User with this email already exists");
       } else {
         setSuccessfullyCreated(true);
-        const loginResponse = await login(username, password);
+        const loginResponse = await loginApi(username, password);
         if (loginResponse.status === 200) {
           dispatch(
             setCurrentUser({

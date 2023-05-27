@@ -3,7 +3,7 @@ import { Grid, Pagination } from "@mui/material";
 import MovieItem from "../content/home/movieItem";
 import { Movie } from "../../types";
 import { FC, useEffect, useState } from "react";
-import { fetchMoviesForCategory } from "../../api";
+import { fetchMoviesForCategoryApi } from "../../api";
 
 type Props = {
   categoryName?: string;
@@ -18,7 +18,7 @@ const BrowseMoviesCategory: FC<Props> = (props) => {
   useEffect(() => {
     const getMovies = async () => {
       if (props.categoryName) {
-        const responseMovies = await fetchMoviesForCategory(
+        const responseMovies = await fetchMoviesForCategoryApi(
           props.categoryName,
           currentPage,
           1,
@@ -36,7 +36,7 @@ const BrowseMoviesCategory: FC<Props> = (props) => {
 
   const changePage = async (page: number) => {
     if (props.categoryName) {
-      const responseMovies = await fetchMoviesForCategory(
+      const responseMovies = await fetchMoviesForCategoryApi(
         props.categoryName,
         page,
         1,

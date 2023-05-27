@@ -1,7 +1,7 @@
 import "./style.scss";
 import { useEffect, useState } from "react";
 import { MovieInfo } from "../../../types";
-import { fetchMovieInfo } from "../../../api";
+import { fetchMovieInfoApi } from "../../../api";
 import { useDispatch } from "react-redux";
 import { setBackgroundImage } from "../../../redux/slices/backgroundImageSlice";
 import { useParams } from "react-router-dom";
@@ -20,7 +20,7 @@ const SpecificMovie = () => {
   useEffect(() => {
     const getMovieInfo = async () => {
       if (movieId) {
-        const response = await fetchMovieInfo(Number(movieId));
+        const response = await fetchMovieInfoApi(Number(movieId));
         if (response.status === 200) {
           setMovie(response.data);
         }
@@ -51,9 +51,9 @@ const SpecificMovie = () => {
           <div className="overview">
             <div className="basic-info">
               <div className="text-button-group">
-                <p className="title">{movie.title}</p>
-                <p>Original title: {movie.originalTitile || movie.title}</p>
-                <p className="quick-info">
+                <div className="title">{movie.title}</div>
+                <div>Original title: {movie.originalTitile || movie.title}</div>
+                <div className="quick-info">
                   <div>
                     {new Date(movie.releaseDate).getFullYear()}
                     <RxDotFilled />
@@ -61,7 +61,7 @@ const SpecificMovie = () => {
                   <div>
                     {movie.runtime} minutes <RxDotFilled />
                   </div>
-                </p>
+                </div>
                 {movie.voteAverage !== 0 && (
                   <AvgRating ratingNumber={Math.round(movie.voteAverage * 10) / 10} size="72" />
                 )}

@@ -4,7 +4,7 @@ import { RootState } from "../../redux/store";
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { FiLogOut } from "react-icons/fi";
-import { logout } from "../../api";
+import { logoutApi } from "../../api";
 import { setCurrentUser } from "../../redux/slices/currentUserSlice";
 import { useNavigate } from "react-router-dom";
 import { routePaths } from "../../types/enums";
@@ -31,7 +31,7 @@ const UserButton: FC<Props> = (props) => {
   const handleLogout = async () => {
     if (currentUser.token) {
       dispatch(setCurrentUser({ token: undefined, username: undefined, userId: undefined }));
-      const response = await logout(currentUser.token);
+      const response = await logoutApi(currentUser.token);
       if (response.status === 200) {
         props.setSnackbarOpen(true);
         navigate(routePaths.home);

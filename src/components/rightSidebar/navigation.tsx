@@ -10,7 +10,7 @@ import { routePaths } from "../../types/enums";
 
 const navigationOptions = [
   { text: "Home", logo: <BiHomeAlt2 />, path: routePaths.home },
-  { text: "Browse Movies", logo: <MdOutlineMovie />, path: "" }
+  { text: "Browse Movies", logo: <MdOutlineMovie />, path: routePaths.browseMovies }
 ];
 
 const userNavigationOptions = [
