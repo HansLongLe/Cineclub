@@ -59,6 +59,13 @@ const ListContent = () => {
             ) : (
               <>
                 <Lists
+                  title="Recomended lists"
+                  apiPath="/list/recommendations"
+                  userId={currentUser.userId || ""}
+                  token={currentUser.token || ""}
+                  hasPagination
+                />
+                <Lists
                   title="Public lists"
                   apiPath="/all_lists"
                   userId={""}

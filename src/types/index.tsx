@@ -76,12 +76,12 @@ export type ListInfo = {
   id: string;
   public: boolean;
   creatorId: string;
-  top5ActorsFromList: Actor[];
+  top5ActorsFromList: Staff[];
   movieDtos: Movie[];
   tagsDtos: Tag[];
 };
 
-export type Actor = {
+export type Staff = {
   character: string;
   id: number;
   knownForDepartment: string;

@@ -1,6 +1,6 @@
 import "./style.scss";
 import { FC, useEffect, useState } from "react";
-import { Actor } from "../../../types";
+import { Staff } from "../../../types";
 import { fetchActorsForMovieApi } from "../../../api";
 import { CircularProgress } from "@mui/material";
 
@@ -9,13 +9,13 @@ type Props = {
 };
 
 const MovieActors: FC<Props> = (props) => {
-  const [actors, setActors] = useState<Actor[]>();
+  const [actors, setActors] = useState<Staff[]>();
 
   useEffect(() => {
     const getActors = async () => {
       const response = await fetchActorsForMovieApi(props.movieId);
       if (response.status === 200) {
-        setActors(response.data.filter((d: Actor) => d.profilePath !== null));
+        setActors(response.data.filter((d: Staff) => d.profilePath !== null));
       }
     };
     getActors();

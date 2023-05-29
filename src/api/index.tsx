@@ -305,3 +305,19 @@ export const fetchPotentialLists = async (movieId: number, userId: string, token
     .catch((error) => error.response);
   return response;
 };
+
+export const fetchTopActorsForListApi = async (listId: string, token: string) => {
+  authorization(token);
+  const response = await axios
+    .get("/list/top_actors?listId=" + listId)
+    .catch((error) => error.response);
+  return response;
+};
+
+export const fetchTopDirectorsForListApi = async (listId: string, token: string) => {
+  authorization(token);
+  const response = await axios
+    .get("/list/top_directors?listId=" + listId)
+    .catch((error) => error.response);
+  return response;
+};

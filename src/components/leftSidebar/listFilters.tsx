@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { MdOutlineExpandMore } from "react-icons/md";
-import { ListInfo, Tag } from "../../types";
+import { Staff, ListInfo, Tag } from "../../types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useLocation, useParams } from "react-router-dom";
@@ -27,6 +27,8 @@ import {
   fetchListInfoApi,
   fetchMyListsTagsApi,
   fetchPublicTagsApi,
+  fetchTopActorsForListApi,
+  fetchTopDirectorsForListApi,
   saveListApi,
   updateListApi
 } from "../../api";
@@ -53,6 +55,8 @@ const ListFilters: FC<Props> = (props) => {
   const [successfullyUpdate, setSuccessfullyUpdated] = useState<boolean>(false);
   const [conflict, setConflict] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(props.listVisibility || false);
+  const [topActors, setTopActors] = useState<Staff[]>();
+  const [topDirectors, setTopDirectors] = useState<Staff[]>();
 
   useEffect(() => {
     const getTags = async () => {
@@ -80,6 +84,27 @@ const ListFilters: FC<Props> = (props) => {
       setTags(undefined);
     };
   }, [successfullyCreated, successfullyDeleted, location.pathname]);
+
+  useEffect(() => {
+    const getTopActors = async () => {
+      if (currentUser.token && listId) {
+        const response = await fetchTopActorsForListApi(listId, currentUser.token);
+        if (response && response.status === 200) {
+          setTopActors(response.data);
+        }
+      }
+    };
+    const getTopDirectors = async () => {
+      if (currentUser.token && listId) {
+        const response = await fetchTopDirectorsForListApi(listId, currentUser.token);
+        if (response && response.status === 200) {
+          setTopDirectors(response.data);
+        }
+      }
+    };
+    getTopActors();
+    getTopDirectors();
+  }, []);
 
   useEffect(() => {
     setVisible(props.listVisibility || false);
@@ -173,6 +198,60 @@ const ListFilters: FC<Props> = (props) => {
             )}
           </AccordionDetails>
         </Accordion>
+        {listId && (
+          <>
+            <Accordion
+              sx={{
+                backgroundColor: "black",
+                overflow: "auto",
+                margin: "8px",
+                width: "100%",
+                borderRadius: "20px"
+              }}>
+              <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
+                <div className="title">Top actors</div>
+              </AccordionSummary>
+              <AccordionDetails>
+                {topActors ? (
+                  topActors.map((actor) => {
+                    return (
+                      <div className="genre-item" key={actor.id}>
+                        {actor.name}
+                      </div>
+                    );
+                  })
+                ) : (
+                  <CircularProgress sx={{ color: "grey" }} />
+                )}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              sx={{
+                backgroundColor: "black",
+                overflow: "auto",
+                margin: "8px",
+                width: "100%",
+                borderRadius: "20px"
+              }}>
+              <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
+                <div className="title">Top directors</div>
+              </AccordionSummary>
+              <AccordionDetails>
+                {topDirectors ? (
+                  topDirectors.map((director) => {
+                    return (
+                      <div className="genre-item" key={director.id}>
+                        {director.name}
+                      </div>
+                    );
+                  })
+                ) : (
+                  <CircularProgress sx={{ color: "grey" }} />
+                )}
+              </AccordionDetails>
+            </Accordion>
+          </>
+        )}
         {listId && !location.pathname.includes(routePaths.publicSpecificList) && (
           <>
             <Button
