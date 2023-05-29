@@ -51,31 +51,50 @@
     width: 100%;
     background-color: black;
     height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     border-radius: 20px;
-    .MuiPaper-root {
-      border-radius: 20px !important ;
-    }
-    & .title {
-      font-weight: bolder;
-      color: white;
-      margin-left: 16px;
-    }
-    & .genre-item {
-      display: flex;
-      align-items: center;
+    & .container {
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-height: 80vh;
       margin: 16px;
-      float: left;
-      border: white 1px solid;
-      padding: 8px;
-      border-radius: 20px;
-    }
-    & .visibility-container {
-      position: absolute;
-      bottom: 100px;
-      left: 36%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+      &::-webkit-scrollbar-track {
+        background: grey;
+        border-radius: 20px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: white;
+        border-radius: 20px;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background: grey;
+      }
+      .MuiPaper-root {
+        border-radius: 20px !important ;
+      }
+      & .title {
+        font-weight: bolder;
+        color: white;
+        margin-left: 16px;
+      }
+      & .genre-item {
+        display: flex;
+        align-items: center;
+        margin: 16px;
+        float: left;
+        border: white 1px solid;
+        padding: 8px;
+        border-radius: 20px;
+      }
+      & .visibility-container {
+        margin-left: 24px;
+        margin-bottom: 16px;
+      }
     }
   }
 }

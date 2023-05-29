@@ -167,148 +167,147 @@ const ListFilters: FC<Props> = (props) => {
   return (
     <>
       <div className="list-filters">
-        <Accordion
-          sx={{
-            backgroundColor: "black",
-            overflow: "auto",
-            margin: "8px",
-            width: "100%",
-            borderRadius: "20px"
-          }}>
-          <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
-            <div className="title">Tags</div>
-          </AccordionSummary>
-          <AccordionDetails>
-            {tags ? (
-              tags.map((tag) => {
-                return (
-                  <div className="genre-item" key={tag.id}>
-                    {tag.name}
-                    {listId && !location.pathname.includes(routePaths.publicSpecificList) && (
-                      <IoClose
-                        style={{ marginLeft: "8px", marginTop: "4px", cursor: "pointer" }}
-                        onClick={() => deleteTag(tag.id)}
-                      />
-                    )}
-                  </div>
-                );
-              })
-            ) : (
-              <CircularProgress sx={{ color: "grey" }} />
-            )}
-          </AccordionDetails>
-        </Accordion>
-        {listId && (
-          <>
-            <Accordion
-              sx={{
-                backgroundColor: "black",
-                overflow: "auto",
-                margin: "8px",
-                width: "100%",
-                borderRadius: "20px"
-              }}>
-              <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
-                <div className="title">Top actors</div>
-              </AccordionSummary>
-              <AccordionDetails>
-                {topActors ? (
-                  topActors.map((actor) => {
-                    return (
-                      <div className="genre-item" key={actor.id}>
-                        {actor.name}
-                      </div>
-                    );
-                  })
-                ) : (
-                  <CircularProgress sx={{ color: "grey" }} />
-                )}
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              sx={{
-                backgroundColor: "black",
-                overflow: "auto",
-                margin: "8px",
-                width: "100%",
-                borderRadius: "20px"
-              }}>
-              <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
-                <div className="title">Top directors</div>
-              </AccordionSummary>
-              <AccordionDetails>
-                {topDirectors ? (
-                  topDirectors.map((director) => {
-                    return (
-                      <div className="genre-item" key={director.id}>
-                        {director.name}
-                      </div>
-                    );
-                  })
-                ) : (
-                  <CircularProgress sx={{ color: "grey" }} />
-                )}
-              </AccordionDetails>
-            </Accordion>
-          </>
-        )}
-        {listId && !location.pathname.includes(routePaths.publicSpecificList) && (
-          <>
-            <Button
-              variant="contained"
-              onClick={() => setToggleDialog(true)}
-              sx={{
-                fontSize: "small",
-                borderRadius: "20px",
-                color: "white",
-                maxHeight: "40px",
-                height: "40px",
-                maxWidth: "128px",
-                width: "128px",
-                backgroundColor: "#8685ef",
-                transition: "background-color 0.3s",
-                margin: "32px 0",
-                "&:hover": {
-                  backgroundColor: "#6665b5"
-                }
-              }}>
-              Add tag
-            </Button>
-            <div className="visibility-container">
-              {visible ? "Public" : "Private"}
-              <Switch
-                checked={visible}
-                onChange={(event) => {
-                  setVisible(event.target.checked);
-                  updateListVisibility(event.target.checked);
-                }}
+        <div className="container">
+          <Accordion
+            sx={{
+              backgroundColor: "black",
+              margin: "8px",
+              width: "100%",
+              borderRadius: "20px"
+            }}>
+            <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
+              <div className="title">Tags</div>
+            </AccordionSummary>
+            <AccordionDetails>
+              {tags ? (
+                tags.map((tag) => {
+                  return (
+                    <div className="genre-item" key={tag.id}>
+                      {tag.name}
+                      {listId && !location.pathname.includes(routePaths.publicSpecificList) && (
+                        <IoClose
+                          style={{ marginLeft: "8px", marginTop: "4px", cursor: "pointer" }}
+                          onClick={() => deleteTag(tag.id)}
+                        />
+                      )}
+                    </div>
+                  );
+                })
+              ) : (
+                <CircularProgress sx={{ color: "grey" }} />
+              )}
+            </AccordionDetails>
+          </Accordion>
+          {listId && (
+            <>
+              <Accordion
                 sx={{
-                  "& .MuiSwitch-track": {
-                    backgroundColor: "grey"
-                  },
-                  "& .Mui-checked": {
-                    color: "#8685ef",
-                    "&+.MuiSwitch-track": {
-                      backgroundColor: "#6665b5"
-                    }
+                  backgroundColor: "black",
+                  margin: "8px",
+                  width: "100%",
+                  borderRadius: "20px"
+                }}>
+                <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
+                  <div className="title">Top actors</div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {topActors ? (
+                    topActors.map((actor) => {
+                      return (
+                        <div className="genre-item" key={actor.id}>
+                          {actor.name}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <CircularProgress sx={{ color: "grey" }} />
+                  )}
+                </AccordionDetails>
+              </Accordion>
+              <Accordion
+                sx={{
+                  backgroundColor: "black",
+                  margin: "8px",
+                  width: "100%",
+                  borderRadius: "20px"
+                }}>
+                <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
+                  <div className="title">Top directors</div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {topDirectors ? (
+                    topDirectors.map((director) => {
+                      return (
+                        <div className="genre-item" key={director.id}>
+                          {director.name}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <CircularProgress sx={{ color: "grey" }} />
+                  )}
+                </AccordionDetails>
+              </Accordion>
+            </>
+          )}
+          {listId && !location.pathname.includes(routePaths.publicSpecificList) && (
+            <>
+              <Button
+                variant="contained"
+                onClick={() => setToggleDialog(true)}
+                sx={{
+                  fontSize: "small",
+                  borderRadius: "20px",
+                  color: "white",
+                  maxHeight: "40px",
+                  height: "40px",
+                  maxWidth: "128px",
+                  width: "128px",
+                  backgroundColor: "#8685ef",
+                  transition: "background-color 0.3s",
+                  margin: "32px 0",
+                  "&:hover": {
+                    backgroundColor: "#6665b5"
                   }
-                }}
-              />
-              <Tooltip
-                title={
-                  <Typography fontSize={12}>
-                    Making the list Public means that the list will be publicly available to all
-                    other users. Everyone can see the content of the list.
-                  </Typography>
-                }
-                placement="right">
-                <IconButton sx={{ color: "grey" }}>
-                  <BsFillInfoCircleFill fontSize={12} />
-                </IconButton>
-              </Tooltip>
-            </div>
-          </>
-        )}
+                }}>
+                Add tag
+              </Button>
+              <div className="visibility-container">
+                {visible ? "Public" : "Private"}
+                <Switch
+                  checked={visible}
+                  onChange={(event) => {
+                    setVisible(event.target.checked);
+                    updateListVisibility(event.target.checked);
+                  }}
+                  sx={{
+                    "& .MuiSwitch-track": {
+                      backgroundColor: "grey"
+                    },
+                    "& .Mui-checked": {
+                      color: "#8685ef",
+                      "&+.MuiSwitch-track": {
+                        backgroundColor: "#6665b5"
+                      }
+                    }
+                  }}
+                />
+                <Tooltip
+                  title={
+                    <Typography fontSize={12}>
+                      Making the list Public means that the list will be publicly available to all
+                      other users. Everyone can see the content of the list.
+                    </Typography>
+                  }
+                  placement="right">
+                  <IconButton sx={{ color: "grey" }}>
+                    <BsFillInfoCircleFill fontSize={12} />
+                  </IconButton>
+                </Tooltip>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       {listId && location.pathname.includes(routePaths.publicSpecificList) && (
