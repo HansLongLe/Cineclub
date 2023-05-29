@@ -9,15 +9,12 @@ import { routePaths } from "../../types/enums";
 
 const SearchArea = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [value, setValue] = useState<string>();
   const [options, setOptions] = useState<Movie[]>();
 
   const handleChange = async (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (location.pathname.includes("Lists") && event.target.value.length !== 0) {
-      console.log("");
-    } else if (event.target.value.length !== 0) {
+    if (event.target.value.length !== 0) {
       setValue(event.target.value);
       const response = await fetchMoviesByKeywords(event.target.value);
       if (response.status === 200) {
@@ -72,7 +69,7 @@ const SearchArea = () => {
             </>
           );
         }}
-        options={location.pathname.includes("Lists") ? [] : options ? options : []}
+        options={options ? options : []}
         getOptionLabel={(option) => option.title}
         sx={{
           background: "linear-gradient(#292828, rgba(48, 48, 48, 0.5))",

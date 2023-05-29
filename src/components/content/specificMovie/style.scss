@@ -2,9 +2,26 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  overflow-y: auto;
+  max-height: 80vh;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: grey;
+    border-radius: 20px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 20px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: grey;
+  }
   & .overview {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     & .basic-info {
       display: flex;
       flex-direction: row;
@@ -47,6 +64,76 @@
         margin-right: 48px;
         border-radius: 30px;
         box-shadow: 12px 12px rgba(0, 0, 0, 0.3);
+      }
+    }
+    & .synopsis {
+      width: 60%;
+      color: white;
+      margin-top: 32px;
+      margin-right: 32px;
+      text-align: end;
+    }
+  }
+  & .details {
+    width: 80%;
+    & .tabs {
+      color: white;
+      & .tab-list {
+        list-style-type: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-right: 32px;
+        & .tab {
+          padding: 16px 24px;
+          font-size: x-large;
+          font-weight: bold;
+          cursor: pointer;
+        }
+        & .react-tabs__tab--selected {
+          border-bottom: #8685ef 4px solid;
+        }
+      }
+      & .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin: 16px 32px;
+        text-align: end;
+
+        & .title {
+          color: grey;
+          margin-right: 16px;
+          text-align: end;
+          white-space: none;
+          overflow: hidden;
+        }
+      }
+      & .movie-actor {
+        overflow: hidden;
+        & .MuiCircularProgress-root {
+          float: right;
+          margin-right: 32px;
+        }
+        & .item {
+          width: 125px;
+          display: flex;
+          float: right;
+          margin: 64px;
+          margin-right: 300px;
+          & img {
+            width: 125px;
+            height: 185px;
+            border-radius: 30px;
+          }
+          & .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            margin: 16px;
+            white-space: nowrap;
+          }
+        }
       }
     }
   }

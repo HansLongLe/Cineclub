@@ -105,26 +105,28 @@ const CarouselMovieItem: FC<Props> = (props) => {
 
   return (
     <div className="movie-item">
-      <div className="button-group">
-        {currentUser.userId ? (
-          <>
-            <IconButton
-              title={watched ? "Remove from watched" : "Add to watched"}
-              onClick={watched ? deleteFromWatched : saveToWatched}
-              sx={{ gridRow: "1" }}>
-              {watched ? <AiFillEye fontSize="48px" /> : <FiEye fontSize="48px" />}
-            </IconButton>
-            <IconButton
-              title={liked ? "Remove from watched" : "Add to liked"}
-              onClick={liked ? deleteFromLiked : saveToLiked}
-              sx={{ gridRow: "1" }}>
-              {liked ? <AiFillHeart fontSize="48px" /> : <AiOutlineHeart fontSize="48px" />}
-            </IconButton>
-          </>
-        ) : (
-          <CircularProgress sx={{ color: "grey" }} />
-        )}
-      </div>
+      {currentUser.userId && (
+        <div className="button-group">
+          {props.movie ? (
+            <>
+              <IconButton
+                title={watched ? "Remove from watched" : "Add to watched"}
+                onClick={watched ? deleteFromWatched : saveToWatched}
+                sx={{ gridRow: "1" }}>
+                {watched ? <AiFillEye fontSize="48px" /> : <FiEye fontSize="48px" />}
+              </IconButton>
+              <IconButton
+                title={liked ? "Remove from watched" : "Add to liked"}
+                onClick={liked ? deleteFromLiked : saveToLiked}
+                sx={{ gridRow: "1" }}>
+                {liked ? <AiFillHeart fontSize="48px" /> : <AiOutlineHeart fontSize="48px" />}
+              </IconButton>
+            </>
+          ) : (
+            <CircularProgress sx={{ color: "grey" }} />
+          )}
+        </div>
+      )}
       <img
         src={process.env.REACT_APP_IMG_URL + props.movie.backdropPath}
         className="img"
