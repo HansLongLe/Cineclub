@@ -25,7 +25,6 @@ const MovieCategories: FC<Props> = (props) => {
       const responseMovies = await fetchMoviesForCategoryApi(props.category, 1, 1, 6, props.period);
       if (responseMovies && responseMovies.data) {
         setMovies(responseMovies.data.movies);
-        console.log(responseMovies.data);
       }
     };
     getMovies();

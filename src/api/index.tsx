@@ -117,7 +117,6 @@ export const saveMovieToListApi = async (
   listId?: string
 ) => {
   authorization(token);
-  console.log(listId);
   const response = await axios
     .post(
       listId ? path : path + "?userid=" + userId + "&tmdbId=" + movieId,
