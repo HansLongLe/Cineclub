@@ -1,7 +1,6 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
 import { MovieInfo } from "../../../types";
-import { Grid } from "@mui/material";
 import MovieDetails from "./movieDetails";
 import MovieActors from "./movieActors";
 
@@ -10,8 +9,6 @@ type Props = {
 };
 
 const SpecificMovieDetails: FC<Props> = (props) => {
-  const [value, setValue] = useState<number>(0);
-
   return (
     <Tabs className="tabs">
       <TabList className="tab-list">

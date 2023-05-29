@@ -1,7 +1,7 @@
 import "./style.scss";
 import { BiSearchAlt } from "react-icons/bi";
 import { Autocomplete, TextField } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 import { fetchMoviesByKeywords } from "../../api";
 import { Movie } from "../../types";
