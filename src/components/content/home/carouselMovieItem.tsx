@@ -23,13 +23,13 @@ const CarouselMovieItem: FC<Props> = (props) => {
 
   useEffect(() => {
     const movieInLists = async () => {
-      if (currentUser.userId && currentUser.token) {
+      if (currentUser && currentUser.userId && currentUser.token) {
         const response = await movieInWatchedOrLikedApi(
           props.movie.id,
           currentUser.userId,
           currentUser.token
         );
-        if (response.status === 200) {
+        if (response && response.status === 200) {
           setLiked(response.data.liked);
           setWatched(response.data.watched);
         }
@@ -105,7 +105,7 @@ const CarouselMovieItem: FC<Props> = (props) => {
 
   return (
     <div className="movie-item">
-      {currentUser.userId && (
+      {currentUser && currentUser.userId && (
         <div className="button-group">
           {props.movie ? (
             <>

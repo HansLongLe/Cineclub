@@ -9,7 +9,7 @@ const TitleLogo = () => {
   };
 
   return (
-    <div className="title-logo" onClick={navigateTo}>
+    <div className="title-logo" onClick={navigateTo} data-testid="title-logo">
       <img src={process.env.PUBLIC_URL + "/images/title1.png"} />
       <img src={process.env.PUBLIC_URL + "/images/title2.png"} className="title-logo__fire" />
     </div>

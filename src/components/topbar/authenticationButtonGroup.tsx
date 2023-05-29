@@ -32,7 +32,7 @@ const AuthenticationButtonGroup: FC<Props> = (props) => {
   };
 
   return (
-    <div className="authentication-button-group">
+    <div className="authentication-button-group" data-testid="authentication-button-group">
       <Button
         disableRipple
         className="authentication-button-group__login-button"

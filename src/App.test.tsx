@@ -1,4 +1,4 @@
-import React from "react";
+import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 import { RouterProvider } from "react-router-dom";
 import router from "./common/router";
@@ -9,6 +9,6 @@ test("renders learn react link", () => {
   render(
     <Provider store={store}>
       <RouterProvider router={router} />
-    </Provider>,
+    </Provider>
   );
 });

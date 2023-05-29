@@ -39,7 +39,7 @@ const MovieItem: FC<Props> = (props) => {
   useEffect(() => {
     const getGenres = async () => {
       const response = await fetchGenresApi();
-      if (response.status === 200) {
+      if (response && response.status === 200) {
         const data: Genre[] = response.data;
         const filteredData = data.filter((d) => {
           return props.movie.genreIds.includes(d.id);
@@ -52,7 +52,7 @@ const MovieItem: FC<Props> = (props) => {
 
   useEffect(() => {
     const movieInLists = async () => {
-      if (currentUser.userId && currentUser.token) {
+      if (currentUser && currentUser.userId && currentUser.token) {
         const response = await movieInWatchedOrLikedApi(
           props.movie.id,
           currentUser.userId,
@@ -153,7 +153,7 @@ const MovieItem: FC<Props> = (props) => {
 
   return (
     <>
-      <div className="movie-item">
+      <div className="movie-item" data-testid="movie-item">
         <div className="movie-item-content">
           <div className="movie-item-content-left-sidebar">
             {isHovering && currentUser.userId && (
@@ -207,7 +207,7 @@ const MovieItem: FC<Props> = (props) => {
                 <AvgRating ratingNumber={Math.round(props.movie.voteAverage * 10) / 10} size="32" />
               ) : (
                 <div className="row">
-                  <div className="value">NaN</div>
+                  <div className="value">{String(NaN)}</div>
                 </div>
               )}
               {genres ? (
@@ -236,11 +236,11 @@ const MovieItem: FC<Props> = (props) => {
               </div>
               <div className="row">
                 Popularity:
-                <div className="value">{Math.round(props.movie.popularity)}</div>
+                <div className="value">{String(Math.round(props.movie.popularity))}</div>
               </div>
               <div className="row">
                 Vote count:
-                <div className="value">{props.movie.voteCount}</div>
+                <div className="value">{String(props.movie.voteCount)}</div>
               </div>
             </div>
           </div>

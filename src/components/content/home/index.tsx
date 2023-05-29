@@ -39,7 +39,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="home">
+      <div className="home" data-testid="home">
         {popularMovies && (
           <div className="home-popular">
             <div className="home-popular__title">

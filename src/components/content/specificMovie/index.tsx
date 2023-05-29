@@ -31,7 +31,7 @@ const SpecificMovie = () => {
     const getMovieInfo = async () => {
       if (movieId) {
         const response = await fetchMovieInfoApi(Number(movieId));
-        if (response.status === 200) {
+        if (response && response.status === 200) {
           setMovie(response.data);
         }
       }
@@ -51,13 +51,13 @@ const SpecificMovie = () => {
 
   useEffect(() => {
     const movieInLists = async () => {
-      if (currentUser.userId && currentUser.token && movieId) {
+      if (currentUser && currentUser.userId && currentUser.token && movieId) {
         const responseRight = await fetchMovieInListsApi(
           Number(movieId),
           currentUser.userId,
           currentUser.token
         );
-        if (responseRight.status === 200) {
+        if (responseRight && responseRight.status === 200) {
           setRight(responseRight.data);
           setSaved(responseRight.data.length !== 0);
         }
