@@ -52,7 +52,7 @@ const ListFilters: FC<Props> = (props) => {
   const [successfullySaved, setSuccessfullySaved] = useState<boolean>(false);
   const [successfullyUpdate, setSuccessfullyUpdated] = useState<boolean>(false);
   const [conflict, setConflict] = useState<boolean>(false);
-  const [visible, setVisible] = useState<boolean | undefined>(props.listVisibility);
+  const [visible, setVisible] = useState<boolean>(props.listVisibility || false);
 
   useEffect(() => {
     const getTags = async () => {
@@ -64,12 +64,12 @@ const ListFilters: FC<Props> = (props) => {
           }
         } else if (location.pathname.includes(routePaths.myLists)) {
           const response = await fetchMyListsTagsApi(currentUser.userId, currentUser.token);
-          if (response.status === 200) {
+          if (response && response.status === 200) {
             setTags(response.data);
           }
         } else {
           const response = await fetchPublicTagsApi(currentUser.token);
-          if (response.status === 200) {
+          if (response && response.status === 200) {
             setTags(response.data);
           }
         }
@@ -82,7 +82,7 @@ const ListFilters: FC<Props> = (props) => {
   }, [successfullyCreated, successfullyDeleted, location.pathname]);
 
   useEffect(() => {
-    setVisible(props.listVisibility);
+    setVisible(props.listVisibility || false);
   }, [props.listVisibility]);
 
   const createTag = async () => {
@@ -91,7 +91,7 @@ const ListFilters: FC<Props> = (props) => {
     }
     if (tagName.length !== 0 && currentUser.userId && currentUser.token && listId) {
       const response = await createTagApi(tagName, currentUser.userId, listId, currentUser.token);
-      if (response.status === 200) {
+      if (response && response.status === 200) {
         setSuccessfullyCreated(true);
         setToggleDialog(false);
       }
@@ -101,7 +101,7 @@ const ListFilters: FC<Props> = (props) => {
   const deleteTag = async (tagId: string) => {
     if (currentUser.userId && currentUser.token) {
       const response = await deleteTagApi(tagId, currentUser.userId, currentUser.token);
-      if (response.status === 200) {
+      if (response && response.status === 200) {
         setSuccessfullyDeleted(true);
       }
     }
@@ -116,7 +116,7 @@ const ListFilters: FC<Props> = (props) => {
   const saveList = async () => {
     if (currentUser.userId && listId && currentUser.token) {
       const response = await saveListApi(currentUser.userId, listId, currentUser.token);
-      if (response.status === 200) {
+      if (response && response.status === 200) {
         setSuccessfullySaved(true);
       } else if (response.status === 409) {
         setConflict(true);
@@ -133,7 +133,7 @@ const ListFilters: FC<Props> = (props) => {
         currentUser.userId,
         currentUser.token
       );
-      if (response.status === 200) {
+      if (response && response.status === 200) {
         setSuccessfullyUpdated(true);
       }
     }

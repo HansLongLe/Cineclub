@@ -53,7 +53,7 @@ const MovieFilters = forwardRef<MovieFiltersRef, Props>((props, ref) => {
   useEffect(() => {
     const getGenres = async () => {
       const response = await fetchGenresApi();
-      if (response.status === 200) {
+      if (response && response.status === 200) {
         setGenres(response.data);
       }
     };
@@ -63,7 +63,7 @@ const MovieFilters = forwardRef<MovieFiltersRef, Props>((props, ref) => {
   useEffect(() => {
     const getLanguages = async () => {
       const response = await fetchLanguagesApi();
-      if (response.status === 200) {
+      if (response && response.status === 200) {
         setLanguages(response.data);
       }
     };

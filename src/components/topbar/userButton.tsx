@@ -41,7 +41,7 @@ const UserButton: FC<Props> = (props) => {
 
   return (
     <>
-      <div className="user-button">
+      <div className="user-button" data-testid="user-button">
         <div className="user-button-container">
           <Avatar className="user-button-container__img" src="/images/avatarIcon.png" />
           <Button disableRipple className="user-button-container__button" onClick={handleClick} />

@@ -45,6 +45,7 @@ const SpecificList = () => {
                 container
                 sx={{ "& .MuiGrid-item": { display: "flex", justifyContent: "center" } }}>
                 {list &&
+                  list.movieDtos &&
                   list.movieDtos.map((movie) => {
                     return (
                       <Grid item key={movie.id} xl={6} lg={12}>
