@@ -53,8 +53,7 @@ const ListContent = () => {
                   hasAddButton
                   userId={currentUser.userId || ""}
                   token={currentUser.token || ""}
-                  hasDeleteButton
-                  canDeleteMovie
+                  hasUnlikeButton
                 />
               </>
             ) : (

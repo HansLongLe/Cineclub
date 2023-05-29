@@ -9,6 +9,7 @@ type Props = {
   applyFiltersToMovies?: Dispatch<SetStateAction<Movie[] | undefined>>;
   changePaginationMaxPage?: Dispatch<SetStateAction<number | undefined>>;
   setCurrentPage?: Dispatch<SetStateAction<number>>;
+  listVisibility?: boolean;
 };
 
 export type LeftSidebarRef = {
@@ -37,7 +38,7 @@ const LeftSidebar = forwardRef<LeftSidebarRef, Props>((props, ref) => {
           setCurrentPage={props.setCurrentPage}
         />
       ) : (
-        <ListFilters />
+        <ListFilters listVisibility={props.listVisibility} />
       )}
     </div>
   );

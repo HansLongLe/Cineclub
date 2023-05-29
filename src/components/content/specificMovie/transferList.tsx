@@ -9,29 +9,57 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import { useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { fetchPotentialLists } from "../../../api";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { useParams } from "react-router-dom";
+import { List as ListType } from "../../../types";
 
-const not = (a: number[], b: number[]) => {
+const not = (a: ListType[], b: ListType[]) => {
   return a.filter((value) => b.indexOf(value) === -1);
 };
 
-const intersection = (a: number[], b: number[]) => {
+const intersection = (a: ListType[], b: ListType[]) => {
   return a.filter((value) => b.indexOf(value) !== -1);
 };
 
-const union = (a: number[], b: number[]) => {
+const union = (a: ListType[], b: ListType[]) => {
   return [...a, ...not(b, a)];
 };
 
-const TransferList = () => {
-  const [checked, setChecked] = useState<number[]>([]);
-  const [left, setLeft] = useState<number[]>([0, 1, 2, 3]);
-  const [right, setRight] = useState<number[]>([4, 5, 6, 7]);
+type Props = {
+  left: ListType[];
+  right: ListType[];
+  setLeft: Dispatch<SetStateAction<ListType[]>>;
+  setRight: Dispatch<SetStateAction<ListType[]>>;
+};
 
-  const leftChecked = intersection(checked, left);
-  const rightChecked = intersection(checked, right);
+const TransferList: FC<Props> = (props) => {
+  const { movieId } = useParams();
+  const { currentUser } = useSelector((state: RootState) => state.currentUser);
+  const [checked, setChecked] = useState<ListType[]>([]);
 
-  const handleToggle = (value: number) => () => {
+  const leftChecked = intersection(checked, props.left);
+  const rightChecked = intersection(checked, props.right);
+
+  useEffect(() => {
+    const potentialLists = async () => {
+      if (currentUser.userId && currentUser.token && movieId) {
+        const responseRight = await fetchPotentialLists(
+          Number(movieId),
+          currentUser.userId,
+          currentUser.token
+        );
+        if (responseRight.status === 200) {
+          props.setLeft(responseRight.data);
+        }
+      }
+    };
+    potentialLists();
+  }, []);
+
+  const handleToggle = (value: ListType) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -44,9 +72,9 @@ const TransferList = () => {
     setChecked(newChecked);
   };
 
-  const numberOfChecked = (items: number[]) => intersection(checked, items).length;
+  const numberOfChecked = (items: ListType[]) => intersection(checked, items).length;
 
-  const handleToggleAll = (items: number[]) => () => {
+  const handleToggleAll = (items: ListType[]) => () => {
     if (numberOfChecked(items) === items.length) {
       setChecked(not(checked, items));
     } else {
@@ -55,18 +83,18 @@ const TransferList = () => {
   };
 
   const handleCheckedRight = () => {
-    setRight(right.concat(leftChecked));
-    setLeft(not(left, leftChecked));
+    props.setRight(props.right.concat(leftChecked));
+    props.setLeft(not(props.left, leftChecked));
     setChecked(not(checked, leftChecked));
   };
 
   const handleCheckedLeft = () => {
-    setLeft(left.concat(rightChecked));
-    setRight(not(right, rightChecked));
+    props.setLeft(props.left.concat(rightChecked));
+    props.setRight(not(props.right, rightChecked));
     setChecked(not(checked, rightChecked));
   };
 
-  const customList = (title: React.ReactNode, items: number[]) => (
+  const customList = (title: React.ReactNode, items: ListType[]) => (
     <Card>
       <CardHeader
         sx={{ px: 2, py: 1, backgroundColor: "#292828" }}
@@ -104,14 +132,14 @@ const TransferList = () => {
         dense
         component="div"
         role="list">
-        {items.map((value: number) => {
-          const labelId = `transfer-list-all-item-${value}-label`;
+        {items.map((list: ListType) => {
+          const labelId = `transfer-list-all-item-${list}-label`;
 
           return (
-            <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
+            <ListItem key={list.id} role="listitem" button onClick={handleToggle(list)}>
               <ListItemIcon>
                 <Checkbox
-                  checked={checked.indexOf(value) !== -1}
+                  checked={checked.indexOf(list) !== -1}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{
@@ -119,7 +147,7 @@ const TransferList = () => {
                   }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`List item ${value + 1}`} />
+              <ListItemText id={labelId} primary={list.name} />
             </ListItem>
           );
         })}
@@ -129,7 +157,7 @@ const TransferList = () => {
 
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="center">
-      <Grid item>{customList("Available lists", left)}</Grid>
+      <Grid item>{customList("Available lists", props.left)}</Grid>
       <Grid item>
         <Grid container direction="column" alignItems="center">
           <Button
@@ -178,7 +206,7 @@ const TransferList = () => {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>{customList("Chosen Lists", right)}</Grid>
+      <Grid item>{customList("Chosen Lists", props.right)}</Grid>
     </Grid>
   );
 };

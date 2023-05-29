@@ -10,7 +10,7 @@ import {
   IconButton
 } from "@mui/material";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { deleteListApi } from "../../../api";
+import { deleteListApi, unlikeListApi } from "../../../api";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ type Props = {
   list: List;
   listSuccessfullyDeleted: (listId: string) => void;
   hasDeleteButton?: boolean;
+  hasUnlikeButton?: boolean;
   canDeleteMovie?: boolean;
 };
 
@@ -31,10 +32,18 @@ const ListItem: FC<Props> = (props) => {
 
   const deleteList = async () => {
     if (currentUser.userId && currentUser.token) {
-      const response = await deleteListApi(props.list.id, currentUser.userId, currentUser.token);
-      if (response.status === 200) {
-        setOpenedDialog(false);
-        props.listSuccessfullyDeleted(props.list.id);
+      if (props.hasDeleteButton) {
+        const response = await deleteListApi(props.list.id, currentUser.userId, currentUser.token);
+        if (response.status === 200) {
+          setOpenedDialog(false);
+          props.listSuccessfullyDeleted(props.list.id);
+        }
+      } else {
+        const response = await unlikeListApi(currentUser.userId, props.list.id, currentUser.token);
+        if (response.status === 200) {
+          setOpenedDialog(false);
+          props.listSuccessfullyDeleted(props.list.id);
+        }
       }
     }
   };
@@ -48,8 +57,8 @@ const ListItem: FC<Props> = (props) => {
             onClick={() =>
               navigate(
                 props.canDeleteMovie
-                  ? "/" + routePaths.specificList + props.list.id
-                  : "/" + routePaths.publicSpecificList + props.list.id
+                  ? "/" + routePaths.specificList + props.list.name + "/" + props.list.id
+                  : "/" + routePaths.publicSpecificList + props.list.name + "/" + props.list.id
               )
             }
           />
@@ -59,8 +68,8 @@ const ListItem: FC<Props> = (props) => {
             onClick={() =>
               navigate(
                 props.canDeleteMovie
-                  ? "/" + routePaths.specificList + props.list.id
-                  : "/" + routePaths.publicSpecificList + props.list.id
+                  ? "/" + routePaths.specificList + props.list.name + "/" + props.list.id
+                  : "/" + routePaths.publicSpecificList + props.list.name + "/" + props.list.id
               )
             }
           />
@@ -69,7 +78,7 @@ const ListItem: FC<Props> = (props) => {
           <div className="list-title">{props.list.name}</div>
           {props.list.movieName && <div className="movie-title">{props.list.movieName}</div>}
         </div>
-        {props.hasDeleteButton && (
+        {(props.hasDeleteButton || props.hasUnlikeButton) && (
           <div className="delete-container">
             <IconButton
               title="Delete list"

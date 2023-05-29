@@ -17,6 +17,7 @@ const SpecificList = () => {
   const { currentUser } = useSelector((state: RootState) => state.currentUser);
 
   const [list, setList] = useState<ListInfo>();
+  const [visible, setVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const getListInfo = async () => {
@@ -24,17 +25,18 @@ const SpecificList = () => {
         const response = await fetchListInfoApi(listId, currentUser.token);
         if (response.status === 200) {
           setList(response.data);
+          setVisible(response.data.public);
         }
       }
     };
     getListInfo();
-  }, [list?.movieDtos]);
+  }, []);
 
   return (
     <div className="specific-list">
       <Grid container sx={{ height: "100%" }}>
         <Grid item xs={3}>
-          <LeftSidebar />
+          <LeftSidebar listVisibility={visible} />
         </Grid>
         <Grid item xs={9}>
           <div className="movies">

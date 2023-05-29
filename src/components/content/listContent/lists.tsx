@@ -33,6 +33,7 @@ type Props = {
   hasCreateButton?: boolean;
   hasAddButton?: boolean;
   hasDeleteButton?: boolean;
+  hasUnlikeButton?: boolean;
   hasPagination?: boolean;
   canDeleteMovie?: boolean;
 };
@@ -157,6 +158,7 @@ const Lists: FC<Props> = (props) => {
                       listSuccessfullyDeleted={listSuccessfullyDeleted}
                       hasDeleteButton={props.hasDeleteButton}
                       canDeleteMovie={props.canDeleteMovie}
+                      hasUnlikeButton={props.hasUnlikeButton}
                     />
                   );
                 })}
@@ -169,6 +171,7 @@ const Lists: FC<Props> = (props) => {
                 listSuccessfullyDeleted={listSuccessfullyDeleted}
                 hasDeleteButton={props.hasDeleteButton}
                 canDeleteMovie={props.canDeleteMovie}
+                hasUnlikeButton={props.hasUnlikeButton}
               />
             </div>
           )

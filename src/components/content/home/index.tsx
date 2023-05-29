@@ -26,7 +26,7 @@ const Home = () => {
   useEffect(() => {
     const getPopularMovies = async () => {
       const responseMovies = await fetchMoviesForCategoryApi(categories.popular);
-      if (responseMovies.status === 200) {
+      if (responseMovies && responseMovies.status === 200) {
         setPopularMovies(responseMovies.data.movies);
       }
     };

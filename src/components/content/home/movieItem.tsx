@@ -156,12 +156,12 @@ const MovieItem: FC<Props> = (props) => {
       <div className="movie-item">
         <div className="movie-item-content">
           <div className="movie-item-content-left-sidebar">
-            {isHovering && (
+            {isHovering && currentUser.userId && (
               <div
                 className="button-group"
                 onMouseOver={() => setIsHovering(true)}
                 onMouseOut={() => setIsHovering(false)}>
-                {currentUser.userId ? (
+                {props.movie ? (
                   <>
                     {props.canDelete ? (
                       <IconButton title="Delete from list" onClick={deleteFromList}>

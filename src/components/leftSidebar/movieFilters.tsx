@@ -163,35 +163,33 @@ const MovieFilters = forwardRef<MovieFiltersRef, Props>((props, ref) => {
   return (
     <div className="movie-filters">
       <div className="container">
-        <>
-          <Accordion sx={{ backgroundColor: "black", overflow: "auto" }}>
-            <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
-              <div className="title">Genres</div>
-            </AccordionSummary>
+        <Accordion sx={{ backgroundColor: "black", overflow: "auto" }}>
+          <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
+            <div className="title">Genres</div>
+          </AccordionSummary>
 
-            <AccordionDetails>
-              {genres ? (
-                genres.map((genre) => {
-                  return (
-                    <div className="genre-item" key={genre.id}>
-                      <FormControlLabel
-                        checked={selectedGenres.some(
-                          (selectedGenreId) => selectedGenreId === genre.id
-                        )}
-                        onChange={() => handleCheckboxChange(genre.id)}
-                        control={<Checkbox />}
-                        label={<div className="name">{genre.name}</div>}
-                      />
-                    </div>
-                  );
-                })
-              ) : (
-                <CircularProgress sx={{ color: "grey" }} />
-              )}
-            </AccordionDetails>
-          </Accordion>
-          <Divider sx={{ borderColor: "white", margin: "16px 0" }} />
-        </>
+          <AccordionDetails>
+            {genres ? (
+              genres.map((genre) => {
+                return (
+                  <div className="genre-item" key={genre.id}>
+                    <FormControlLabel
+                      checked={selectedGenres.some(
+                        (selectedGenreId) => selectedGenreId === genre.id
+                      )}
+                      onChange={() => handleCheckboxChange(genre.id)}
+                      control={<Checkbox />}
+                      label={<div className="name">{genre.name}</div>}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <CircularProgress sx={{ color: "grey" }} />
+            )}
+          </AccordionDetails>
+        </Accordion>
+        <Divider sx={{ borderColor: "white", margin: "16px 0" }} />
 
         <Accordion sx={{ backgroundColor: "black", overflow: "auto" }}>
           <AccordionSummary expandIcon={<MdOutlineExpandMore color="white" size="24px" />}>
