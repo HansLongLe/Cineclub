@@ -5,7 +5,6 @@ import {
   deleteMovieFromListApi,
   fetchMovieInListsApi,
   fetchMovieInfoApi,
-  fetchPotentialLists,
   saveMovieToListApi
 } from "../../../api";
 import { useDispatch, useSelector } from "react-redux";

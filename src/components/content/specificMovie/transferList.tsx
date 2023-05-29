@@ -10,7 +10,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { fetchMovieInListsApi, fetchPotentialLists } from "../../../api";
+import { fetchPotentialLists } from "../../../api";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useParams } from "react-router-dom";
