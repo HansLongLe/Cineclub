@@ -63,7 +63,6 @@ const Lists: FC<Props> = (props) => {
         props.hasPagination ? 10 : undefined
       );
       if (response && response.status === 200) {
-        console.log(response.data);
         setCategoryList(response.data);
         if (response.data.totalPages !== undefined) {
           setMaxPage(response.data.totalPages);
