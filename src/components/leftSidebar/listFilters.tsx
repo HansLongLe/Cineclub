@@ -307,31 +307,30 @@ const ListFilters: FC<Props> = (props) => {
               </div>
             </>
           )}
+          {listId && location.pathname.includes(routePaths.publicSpecificList) && (
+            <Button
+              variant="contained"
+              onClick={saveList}
+              sx={{
+                fontSize: "small",
+                borderRadius: "20px",
+                color: "white",
+                maxHeight: "40px",
+                height: "40px",
+                maxWidth: "128px",
+                width: "128px",
+                backgroundColor: "#8685ef",
+                transition: "background-color 0.3s",
+                margin: "32px 0",
+                "&:hover": {
+                  backgroundColor: "#6665b5"
+                }
+              }}>
+              Save list
+            </Button>
+          )}
         </div>
       </div>
-
-      {listId && location.pathname.includes(routePaths.publicSpecificList) && (
-        <Button
-          variant="contained"
-          onClick={saveList}
-          sx={{
-            fontSize: "small",
-            borderRadius: "20px",
-            color: "white",
-            maxHeight: "40px",
-            height: "40px",
-            maxWidth: "128px",
-            width: "128px",
-            backgroundColor: "#8685ef",
-            transition: "background-color 0.3s",
-            margin: "32px 0",
-            "&:hover": {
-              backgroundColor: "#6665b5"
-            }
-          }}>
-          Save list
-        </Button>
-      )}
 
       <Dialog
         open={openedDialog}

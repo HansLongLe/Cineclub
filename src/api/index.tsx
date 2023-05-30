@@ -81,7 +81,7 @@ export const fetchListApi = async (
   const response = await axios
     .get(
       page && start && end
-        ? path + "?page=" + page + "&start=" + start + "&end=" + end
+        ? userId.length !== 0 ? path + "?userId=" + userId + "&page=" + page + "&start=" + start + "&end=" + end : path +  "?page=" + page + "&start=" + start + "&end=" + end
         : path + userId
     )
     .catch((error) => error.response);

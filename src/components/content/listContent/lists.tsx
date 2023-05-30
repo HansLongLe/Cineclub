@@ -63,7 +63,7 @@ const Lists: FC<Props> = (props) => {
         props.hasPagination ? 10 : undefined
       );
       if (response && response.status === 200) {
-        console.log(response);
+        console.log(response.data);
         setCategoryList(response.data);
         if (response.data.totalPages !== undefined) {
           setMaxPage(response.data.totalPages);
@@ -151,10 +151,10 @@ const Lists: FC<Props> = (props) => {
           Array.isArray(categoryList) ? (
             <div className="lists">
               {categoryList.length !== 0 &&
-                categoryList.map((list) => {
+                categoryList.map((list, index) => {
                   return (
                     <ListItem
-                      key={list.id}
+                      key={index}
                       list={list}
                       listSuccessfullyDeleted={listSuccessfullyDeleted}
                       hasDeleteButton={props.hasDeleteButton}
